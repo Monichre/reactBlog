@@ -1,223 +1,133 @@
 import React, { Component } from 'react';
+import BlogPost from './BlogPost';
+import Cosmic from 'cosmicjs';
 
 
-class Home extends Component {
-  render() {
+var Home = React.createClass({
 
-    return (
+    getInitialState: function() {
+
+        return {
+            blogPostObjects: []
+        }
+    },
+
+    componentDidMount: function() {
+        var _this = this;
+        var config = {};
+        config.bucket = {
+            slug: 'blog-attempt'
+
+        };
+        var params = {
+            type_slug: 'posts'
+        };
+
+        Cosmic.getObjectType(config, params, (err, res) => {
+            console.log(res.objects.all); //this is an array of objects (blog post objects)
+                _this.setState({
+                    blogPostObjects: res.objects.all
+                });
+            });
+    },
+
+    render: function() {
+
+      return (
         <section id="bricks">
-
         	<div className="row masonry">
-
-
               <div className="bricks-wrapper">
+              	 <div className="grid-sizer"></div>
+                  	<div className="brick entry featured-grid animate-this">
+                  		<div className="entry-content">
+                  			<div id="featured-post-slider" className="flexslider">
+         			   			<ul className="slides">
+         				   			<li>
+         				   				<div className="featured-post-slide">
+         						   			<div className="post-background"></div>
+         								   	<div className="overlay"></div>
+         								   	<div className="post-content">
+         								   		<ul className="entry-meta">
+         												<li>September 06, 2016</li>
+         												<li><a href="#" >Naruto Uzumaki</a></li>
+         											</ul>
+         								   		<h1 className="slide-title"><a href="single-standard.html" title="">Minimalism Never Goes Out of Style</a></h1>
+         								   	</div>
+         				   				</div>
+         				   			</li>
+         				   			<li>
+         				   				<div className="featured-post-slide">
+         						   			<div className="post-background"></div>
+         								   	<div className="overlay"></div>
+         								   	<div className="post-content">
+         								   		<ul className="entry-meta">
+         												<li>August 29, 2016</li>
+         												<li><a href="#">Sasuke Uchiha</a></li>
+         											</ul>
+         								   		<h1 className="slide-title"><a href="single-standard.html" title="">Enhancing Your Designs with Negative Space</a></h1>
+         						   			</div>
+         				   				</div>
+         				   			</li>
+         				   			<li>
+         				   				<div className="featured-post-slide">
+         						   			<div className="post-background"></div>
+         								   	<div className="overlay"></div>
+         								   	<div className="post-content">
+         								   		<ul className="entry-meta">
+         												<li>August 27, 2016</li>
+         												<li><a href="#" className="author">Naruto Uzumaki</a></li>
+         											</ul>
+         								   		<h1 className="slide-title"><a href="single-standard.html" title="">Music Album Cover Designs for Inspiration</a></h1>
+         						   			</div>
+         				   				</div>
+         				   			</li>
+         				   		</ul>
+         				   	</div>
+                  		</div>
+                  	</div>
 
-              	<div className="grid-sizer"></div>
-
-              	<div className="brick entry featured-grid animate-this">
-              		<div className="entry-content">
-              			<div id="featured-post-slider" className="flexslider">
-     			   			<ul className="slides">
-
-     				   			<li>
-     				   				<div className="featured-post-slide">
-
-     						   			<div className="post-background"></div>
-
-     								   	<div className="overlay"></div>
-
-     								   	<div className="post-content">
-     								   		<ul className="entry-meta">
-     												<li>September 06, 2016</li>
-     												<li><a href="#" >Naruto Uzumaki</a></li>
-     											</ul>
-
-     								   		<h1 className="slide-title"><a href="single-standard.html" title="">Minimalism Never Goes Out of Style</a></h1>
-     								   	</div>
-
-     				   				</div>
-     				   			</li>
-
-     				   			<li>
-     				   				<div className="featured-post-slide">
-
-     						   			<div className="post-background"></div>
-
-     								   	<div className="overlay"></div>
-
-     								   	<div className="post-content">
-     								   		<ul className="entry-meta">
-     												<li>August 29, 2016</li>
-     												<li><a href="#">Sasuke Uchiha</a></li>
-     											</ul>
-
-     								   		<h1 className="slide-title"><a href="single-standard.html" title="">Enhancing Your Designs with Negative Space</a></h1>
-     						   			</div>
-
-     				   				</div>
-     				   			</li>
-
-     				   			<li>
-     				   				<div className="featured-post-slide">
-
-     						   			<div className="post-background"></div>
-
-     								   	<div className="overlay"></div>
-
-     								   	<div className="post-content">
-     								   		<ul className="entry-meta">
-     												<li>August 27, 2016</li>
-     												<li><a href="#" className="author">Naruto Uzumaki</a></li>
-     											</ul>
-
-     								   		<h1 className="slide-title"><a href="single-standard.html" title="">Music Album Cover Designs for Inspiration</a></h1>
-     						   			</div>
-
-     				   				</div>
-     				   			</li>
-
-     				   		</ul>
-     				   	</div>
-              		</div>
-              	</div>
-
-              	<article className="brick entry format-standard animate-this">
-
-                    <div className="entry-thumb">
-                       <a href="single-standard.html" className="thumb-link">
-     	                  <img src="images/thumbs/diagonal-building.jpg" alt="building" />
-                       </a>
-                    </div>
-
-                    <div className="entry-text">
-                    	<div className="entry-header">
-
-                    		<div className="entry-meta">
-                    			<span className="cat-links">
-                    				<a href="#">Design</a>
-                    				<a href="#">Photography</a>
-                    			</span>
-                    		</div>
-
-                    		<h1 className="entry-title"><a href="single-standard.html">Just a Standard Format Post.</a></h1>
-
-                    	</div>
-     						<div className="entry-excerpt">
-     							Lorem ipsum Sed eiusmod esse aliqua sed incididunt aliqua incididunt mollit id et sit proident dolor nulla sed commodo est ad minim elit reprehenderit nisi officia aute incididunt velit sint in aliqua cillum in consequat consequat in culpa in anim.
-     						</div>
-                    </div>
-
-             		</article>
-
-                 <article className="brick entry format-standard animate-this">
-
-                    <div className="entry-thumb">
-                       <a href="single-standard.html" className="thumb-link">
-     	                  <img src="images/thumbs/ferris-wheel.jpg" alt="ferris wheel" />
-                       </a>
-                    </div>
-
-                    <div className="entry-text">
-                    	<div className="entry-header">
-
-                    		<div className="entry-meta">
-                    			<span className="cat-links">
-                    				<a href="#">Design</a>
-                    				<a href="#">UI</a>
-                    			</span>
-                    		</div>
-
-                    		<h1 className="entry-title"><a href="single-standard.html">This Is Another Standard Format Post.</a></h1>
-
-                    	</div>
-     						<div className="entry-excerpt">
-     							Lorem ipsum Sed eiusmod esse aliqua sed incididunt aliqua incididunt mollit id et sit proident dolor nulla sed commodo est ad minim elit reprehenderit nisi officia aute incididunt velit sint in aliqua cillum in consequat consequat in culpa in anim.
-     						</div>
-                    </div>
-
-             		</article>
-
-
-                 <article className="brick entry format-audio animate-this">
-
-                    <div className="entry-thumb">
-                       <a href="single-audio.html" className="thumb-link">
-     	                  <img src="images/thumbs/concert.jpg" alt="concert" />
-                       </a>
-
-                       <div className="audio-wrap">
-                       	<audio id="player" src="media/AirReview-Landmarks-02-ChasingCorporate.mp3" width="100%" height="42" controls="controls"></audio>
-                       </div>
-                    </div>
-
-                    <div className="entry-text">
-                    	<div className="entry-header">
-
-                    		<div className="entry-meta">
-                    			<span className="cat-links">
-                    				<a href="#">Design</a>
-                    				<a href="#">Music</a>
-                    			</span>
-                    		</div>
-
-                    		<h1 className="entry-title"><a href="single-audio.html">This Is a Audio Format Post.</a></h1>
-
-                    	</div>
-     						<div className="entry-excerpt">
-     							Lorem ipsum Sed eiusmod esse aliqua sed incididunt aliqua incididunt mollit id et sit proident dolor nulla sed commodo est ad minim elit reprehenderit nisi officia aute incididunt velit sint in aliqua cillum in consequat consequat in culpa in anim.
-     						</div>
-                    </div>
-
-             		</article>
+                    {this.state.blogPostObjects.map(function(post) {
+                        return (
+                            <BlogPost title={post.title} content={post.content} />
+                        );        
+                    })}
 
               	<article className="brick entry format-quote animate-this" >
-
                     <div className="entry-thumb">
      	               <blockquote>
-     	                 	<p>Good design is making something intelligible and memorable. Great design is making something memorable and meaningful.</p>
-
-     	                 	<cite>Dieter Rams</cite>
+     	                 	<p>Good design is making something intelligible and design is making something memorable and meaningful.</p>
      	               </blockquote>
                     </div>
 
-             		</article>
-
+             	</article>
               	<article className="brick entry animate-this">
-
                     <div className="entry-thumb">
                        <a href="single-standard.html" className="thumb-link">
      	                  <img src="images/thumbs/shutterbug.jpg" alt="Shutterbug" />
                        </a>
                     </div>
-
                     <div className="entry-text">
                     	<div className="entry-header">
-
                     		<div className="entry-meta">
                     			<span className="cat-links">
                     				<a href="#">Photography</a>
                     				<a href="#">html</a>
                     			</span>
                     		</div>
-
                     		<h1 className="entry-title"><a href="single-standard.html">Photography Skills Can Improve Your Graphic Design.</a></h1>
-
                     	</div>
      						<div className="entry-excerpt">
      							Lorem ipsum Sed eiusmod esse aliqua sed incididunt aliqua incididunt mollit id et sit proident dolor nulla sed commodo est ad minim elit reprehenderit nisi officia aute incididunt velit sint in aliqua cillum in consequat consequat in culpa in anim.
      						</div>
                     </div>
+             	</article>
 
-             		</article>
-
-                 <article className="brick entry animate-this" >
-
+                <article className="brick entry animate-this" >
                     <div className="entry-thumb">
                        <a href="single-standard.html" className="thumb-link">
      	                  <img src="images/thumbs/usaf-rocket.jpg" alt="USAF rocket" />
                        </a>
                     </div>
-
                     <div className="entry-text">
                     	<div className="entry-header">
 
@@ -429,7 +339,7 @@ class Home extends Component {
         </section>
     );
 
-  }
-}
+    }
+});
 
 export default Home;
